@@ -1,5 +1,6 @@
 // src/todo/todo.resolver.ts
-import { Args, ID, Query, Resolver } from '@nestjs/graphql';
+import { Args, ID, Mutation, Query, Resolver } from '@nestjs/graphql';
+import { CreateTodoDto } from './dto/create-todo.dto';
 import { Todo } from './models/todo.models';
 import { TodoService } from './todo.service';
 
@@ -23,5 +24,12 @@ export class TodoResolver {
   // schema上の型定義は findOneById(id: ID!): Todo! となる
   findOneById(@Args('id', { type: () => ID }) id: string) {
     return this.todoService.findOneById(id);
+  }
+
+  // MutationデコレータでMutationを定義
+  // https://docs.nestjs.com/graphql/mutations
+  @Mutation(() => Todo)
+  create(@Args('todo') todo: CreateTodoDto): Todo {
+    return this.todoService.create(todo);
   }
 }

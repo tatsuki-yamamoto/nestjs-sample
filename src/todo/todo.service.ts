@@ -1,6 +1,8 @@
 // src/todo/todo.service.ts
+import { v4 } from 'uuid';
 import { Injectable, NotFoundException } from '@nestjs/common';
 import { Todo, TodoStatus } from './models/todo.models';
+import { CreateTodoDto } from './dto/create-todo.dto';
 
 @Injectable()
 export class TodoService {
@@ -36,6 +38,7 @@ export class TodoService {
   findAll(): Todo[] {
     return this.todoList;
   }
+
   // idを元に一件取得のメソッド
   findOneById(id: string): Todo {
     const result = this.todoList.find((todo) => id === todo.id);
@@ -45,5 +48,19 @@ export class TodoService {
       throw new NotFoundException();
     }
     return result;
+  }
+
+  // 新しいTodoを追加する。
+  // ID等、自動的に設定できる項目は引数として受け取らないようにする。
+  create(createTodoDto: CreateTodoDto): Todo {
+    const newTodo: Todo = {
+      ...createTodoDto,
+      id: v4(),
+      status: TodoStatus.NEW,
+      createdAt: new Date(),
+      updatedAt: new Date(),
+    };
+    this.todoList.push(newTodo);
+    return newTodo;
   }
 }
