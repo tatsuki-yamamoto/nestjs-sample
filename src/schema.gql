@@ -12,8 +12,14 @@ A date-time string at UTC, such as 2019-12-03T09:54:33Z, compliant with the date
 """
 scalar DateTime
 
+input DeleteTodoDto {
+  id: ID!
+}
+
 type Mutation {
   create(todo: CreateTodoDto!): Todo!
+  delete(todo: DeleteTodoDto!): Todo!
+  updateStatus(todo: UpdateStatusDto!): Todo!
 }
 
 type Query {
@@ -34,4 +40,9 @@ enum TodoStatus {
   COMPLETE
   IN_PROGRESS
   NEW
+}
+
+input UpdateStatusDto {
+  id: ID!
+  status: TodoStatus!
 }

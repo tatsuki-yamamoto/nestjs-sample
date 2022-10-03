@@ -1,6 +1,8 @@
 // src/todo/todo.resolver.ts
 import { Args, ID, Mutation, Query, Resolver } from '@nestjs/graphql';
 import { CreateTodoDto } from './dto/create-todo.dto';
+import { DeleteTodoDto } from './dto/delete-todo.dto';
+import { UpdateStatusDto } from './dto/update-status.dto';
 import { Todo } from './models/todo.models';
 import { TodoService } from './todo.service';
 
@@ -31,5 +33,15 @@ export class TodoResolver {
   @Mutation(() => Todo)
   create(@Args('todo') todo: CreateTodoDto): Todo {
     return this.todoService.create(todo);
+  }
+
+  @Mutation(() => Todo)
+  updateStatus(@Args('todo') todo: UpdateStatusDto): Todo {
+    return this.todoService.updateStatus(todo);
+  }
+
+  @Mutation(() => Todo)
+  delete(@Args('todo') todo: DeleteTodoDto): Todo {
+    return this.todoService.delete(todo);
   }
 }
