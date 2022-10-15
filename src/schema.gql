@@ -17,14 +17,14 @@ input DeleteTodoDto {
 }
 
 type Mutation {
-  create(todo: CreateTodoDto!): Todo!
-  delete(todo: DeleteTodoDto!): Todo!
+  createTodo(todo: CreateTodoDto!): Todo!
+  deleteTodo(todo: DeleteTodoDto!): Todo!
   updateStatus(todo: UpdateStatusDto!): Todo!
 }
 
 type Query {
-  findAll: [Todo]!
-  findOneById(id: ID!): Todo!
+  findTodoById(id: ID!): Todo!
+  findTodoList: [Todo]!
 }
 
 type Todo {

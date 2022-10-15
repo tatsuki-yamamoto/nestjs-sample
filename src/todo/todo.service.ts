@@ -37,12 +37,12 @@ export class TodoService {
   ];
 
   // 全件取得のメソッド
-  findAll(): Todo[] {
+  findTodoList(): Todo[] {
     return this.todoList;
   }
 
   // idを元に一件取得のメソッド
-  findOneById(id: string): Todo {
+  findTodoById(id: string): Todo {
     const result = this.todoList.find((todo) => id === todo.id);
     if (!result) {
       // なかったら404エラーを返す。ビルトインのエラーも豊富にあってエラー処理も結構楽
@@ -54,7 +54,7 @@ export class TodoService {
 
   // 新しいTodoを追加する。
   // ID等、自動的に設定できる項目は引数として受け取らないようにする。
-  create(createTodoDto: CreateTodoDto): Todo {
+  createTodo(createTodoDto: CreateTodoDto): Todo {
     const newTodo: Todo = {
       ...createTodoDto,
       id: v4(),
@@ -84,7 +84,7 @@ export class TodoService {
     return newTodo;
   }
 
-  delete({ id }: DeleteTodoDto): Todo {
+  deleteTodo({ id }: DeleteTodoDto): Todo {
     const targetTodo = this.todoList.find((todo) => todo.id === id);
     if (!targetTodo) {
       throw new NotFoundException();
