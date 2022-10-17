@@ -1,5 +1,5 @@
 import { Field, ID, InputType } from '@nestjs/graphql';
-import { TodoStatus } from '../models/todo.models';
+import { TodoStatus } from '../entities/todo.entity';
 
 @InputType()
 export class UpdateStatusDto {

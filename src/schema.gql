@@ -24,12 +24,12 @@ type Mutation {
 
 type Query {
   findTodoById(id: ID!): Todo!
-  findTodoList: [Todo]!
+  findTodos: [Todo]!
 }
 
 type Todo {
   createdAt: DateTime!
-  description: String
+  description: String!
   id: ID!
   status: TodoStatus!
   title: String!

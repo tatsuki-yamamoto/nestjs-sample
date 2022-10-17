@@ -5,9 +5,12 @@ import { join } from 'path';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { TodoModule } from './todo/todo.module';
+import { DatabaseModule } from './database/database.module';
+import { ConfigModule } from '@nestjs/config';
 
 @Module({
   imports: [
+    ConfigModule.forRoot(),
     GraphQLModule.forRoot<ApolloDriverConfig>({
       driver: ApolloDriver,
       // schemaファイルのパスを指定
@@ -16,6 +19,7 @@ import { TodoModule } from './todo/todo.module';
       sortSchema: true,
     }),
     TodoModule,
+    DatabaseModule,
   ],
   controllers: [AppController],
   providers: [AppService],
